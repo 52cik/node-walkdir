@@ -1,0 +1,25 @@
+{
+  "name": "node-walkdir",
+  "version": "0.1.0",
+  "description": "node walkdir",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --check-leaks --reporter spec --bail",
+    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --check-leaks --reporter dot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/52cik/node-walkdir.git"
+  },
+  "keywords": [],
+  "author": "楼教主 <fe.52cik@gmail.com> (http://www.52cik.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/52cik/node-walkdir/issues"
+  },
+  "homepage": "https://github.com/52cik/node-walkdir#readme",
+  "devDependencies": {
+    "istanbul": "^0.4.5",
+    "mocha": "^3.1.0"
+  }
+}
