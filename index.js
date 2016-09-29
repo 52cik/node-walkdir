@@ -2,15 +2,16 @@ var fs = require('fs');
 var join = require('path').join;
 var matchOperatorsRe = /[|\\{}()[\]^$+*?.]/g;
 
+
 module.exports = function(path, type, callback) {
   if (typeof type === 'function') {
     callback = type;
   } else {
     if (typeof type === 'string') {
-      type = RegExp(escapeRegexp(type) + '$');
+      type = RegExp(escapeRegexp(type) + '$', 'i');
     } else if (type instanceof Array) {
       type = '(?:' + type.map(escapeRegexp).join('|') + ')$';
-      type = RegExp(type);
+      type = RegExp(type, 'i');
     }
   }
 
@@ -25,9 +26,11 @@ module.exports = function(path, type, callback) {
   });
 };
 
+
 function escapeRegexp(str) {
   return str.replace(matchOperatorsRe, '\\$&');
 }
+
 
 function walk(path, callback) {
   fs.readdir(path, function(err, files) {
