@@ -1,6 +1,6 @@
 {
   "name": "node-walkdir",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "node walkdir",
   "main": "index.js",
   "scripts": {
@@ -20,6 +20,8 @@
   "homepage": "https://github.com/52cik/node-walkdir#readme",
   "devDependencies": {
     "istanbul": "^0.4.5",
-    "mocha": "^3.1.0"
+    "mocha": "^3.1.0",
+    "mock-fs": "^3.11.0",
+    "should": "^11.1.0"
   }
 }
