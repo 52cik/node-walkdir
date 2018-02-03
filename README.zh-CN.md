@@ -1,6 +1,6 @@
 # node-walkdir
 
-> node traversal files (async/sync)
+> 支持类型和层级的目录遍历工具 (支持同步/异步)
 
 [![Linux Build][travis-image]][travis-url]
 [![Coverage Status][coveralls-image]][coveralls-url]
@@ -8,68 +8,67 @@
 [![node][node-image]][node-url]
 [![license MIT][license-image]][license-url]
 
-[中文文档](README.zh-CN.md)
 
-## Requirements
+## 环境要求
 
-> node8 or higher
+> node8 或更高
 
-## How to use it
+## 如何使用
 
-### Installation
+### 安卓
 
 ```sh
 $ yarn add node-walkdir
-# or
+# 或者
 $ npm install node-walkdir
 ```
 
-### Examples
+### 例子
 
 ```js
 const walkdir = require('node-walkdir')
 
-/** async */
+/** 异步 */
 (async() => {
-  // walk all files by default
+  // 遍历所有文件
   const allFiles = await walk('you-path');
   console.log('files:', allFiles);
 
-  // only traverse the JS files
+  // 只遍历js文件 (忽略大小写)
   const jsFiles = await walk('you-path', '.js');
   console.log('files:', jsFiles);
 
-  // traverse the JS and JSON files
+  // 只遍历 .js .json 文件 (忽略大小写)
   const jsonFiles = await walk('you-path', ['.js', '.json']);
   console.log('files:', jsonFiles);
 
-  // traverse the JS and JSON files by regexp
+  // 基于正则遍历 .js .json 文件 (大小写敏感)
   const json2Files = await walk('you-path', /\.js(on)?$/);
   console.log('files:', json2Files);
 
-  // only traverse the JS files with 2 level directories deep.
+  // 基于正则遍历 .js .json 文件 (大小写敏感)，只处理到2级目录
   const js2Files = await walk('you-path', '.js', 2);
   console.log('files:', js2Files);
 })();
 
-/** sync */
-// walk all files by default
+/** 同步 */
+// 遍历所有文件
 const allFiles = walk.sync('you-path');
 console.log('files:', allFiles);
 
-// only traverse the JS files
+// 只遍历js文件 (忽略大小写)
 const jsFiles = walk.sync('you-path', '.js');
 console.log('files:', jsFiles);
 
-// traverse the JS and JSON files
+// 只遍历 .js .json 文件 (忽略大小写)
 const jsonFiles = walk.sync('you-path', ['.js', '.json']);
 console.log('files:', jsonFiles);
 
-// traverse the JS and JSON files by regexp
+// 基于正则遍历 .js .json 文件 (大小写敏感)
 const json2Files = walk.sync('you-path', /\.js(on)?$/);
 console.log('files:', json2Files);
 
-// only traverse the JS files with 2 level directories deep.
+// 基于正则遍历 .js .json 文件 (大小写敏感)，只处理到2级目录
 const js2Files = walk.sync('you-path', '.js', 2);
 console.log('files:', js2Files);
 ```
