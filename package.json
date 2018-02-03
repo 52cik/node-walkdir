@@ -27,5 +27,8 @@
     "eslint-plugin-import": "^2.8.0",
     "mock-fs": "^4.4.2",
     "nyc": "^11.4.1"
+  },
+  "engines": {
+    "node": ">=8"
   }
 }
