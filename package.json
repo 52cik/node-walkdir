@@ -1,11 +1,12 @@
 {
   "name": "node-walkdir",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "node walkdir",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --check-leaks --reporter spec --bail",
-    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --check-leaks --reporter dot"
+    "test": "nyc ava",
+    "test-cov": "nyc --reporter=html --reporter=text ava",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -19,9 +20,12 @@
   },
   "homepage": "https://github.com/52cik/node-walkdir#readme",
   "devDependencies": {
-    "istanbul": "^0.4.5",
-    "mocha": "^3.1.0",
-    "mock-fs": "^3.11.0",
-    "should": "^11.1.0"
+    "ava": "^0.25.0",
+    "coveralls": "^3.0.0",
+    "eslint": "^4.17.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "mock-fs": "^4.4.2",
+    "nyc": "^11.4.1"
   }
 }
