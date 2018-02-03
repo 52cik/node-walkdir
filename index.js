@@ -1,58 +1,41 @@
-var fs = require('fs');
-var join = require('path').join;
-var matchOperatorsRe = /[|\\{}()[\]^$+*?.]/g;
+const walk = require('./lib/walk');
+const walkSync = require('./lib/walkSync');
 
-
-module.exports = function(path, type, callback) {
-  if (typeof type === 'function') {
-    callback = type;
-  } else {
-    if (typeof type === 'string') {
-      type = RegExp(escapeRegexp(type) + '$', 'i');
-    } else if (type instanceof Array) {
-      type = '(?:' + type.map(escapeRegexp).join('|') + ')$';
-      type = RegExp(type, 'i');
-    }
-  }
-
-  if (!(type instanceof RegExp)) {
-    type = /./;
-  }
-
-  walk(path, function(file, stat) {
-    if (type.test(file)) {
-      callback && callback(file, stat);
-    }
-  });
-};
-
-
+/**
+ * 转义正则
+ *
+ * @param {string} str
+ * @returns
+ */
 function escapeRegexp(str) {
-  return str.replace(matchOperatorsRe, '\\$&');
+  return str.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&');
 }
 
-
-function walk(path, callback) {
-  fs.readdir(path, function(err, files) {
-    if (err) {
-      throw new Error(err);
+/**
+ * 遍历目录
+ *
+ * @param {function} walker
+ */
+function wrap(walker) {
+  /**
+   * @param {string} path
+   * @param {RegExp|string|string[]} [pattern=/./]
+   * @param {number} [depth=0]
+   */
+  return (path, pattern = /./, depth = 0) => {
+    if (pattern instanceof RegExp) {
+      // nothing to do
+    } else if (typeof pattern === 'string') {
+      pattern = RegExp(`${escapeRegexp(pattern)}$`, 'i');
+    } else if (pattern instanceof Array) {
+      pattern = `(?:${pattern.map(escapeRegexp).join('|')})$`;
+      pattern = RegExp(pattern, 'i');
+    } else {
+      pattern = /./;
     }
-
-    files.forEach(function(name) {
-      var filePath = join(path, name);
-
-      fs.stat(filePath, function(err, stat) {
-        if (err) {
-          throw new Error(err);
-        }
-
-        if (stat.isFile()) {
-          callback(filePath, stat);
-        } else if (stat.isDirectory()) {
-          walk(filePath, callback);
-        }
-      });
-    });
-
-  });
+    return walker(path, pattern, depth);
+  };
 }
+
+module.exports = wrap(walk);
+module.exports.sync = wrap(walkSync);
