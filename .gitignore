@@ -1,17 +1,17 @@
-!.gitignore
-
-# Dependency directory
 node_modules
-
-# windows thumbnail cache
 Thumbs.db
 Desktop.ini
-
-# Mac OS X DS_Store
 .DS_Store
-
-# webstorm
+.vscode
+.*.swp
 .idea
+npm-debug.log
+yarn.lock
 
-# Coverage directory
 coverage
+.nyc_output
+
+/.ine-versions
+/node
+/npm
+/npx
