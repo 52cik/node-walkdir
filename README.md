@@ -88,4 +88,4 @@ console.log('files:', js2Files);
 [dependencies-image]: https://img.shields.io/david/52cik/node-walkdir.svg?style=flat
 
 [node-url]: https://nodejs.org
-[node-image]: https://img.shields.io/badge/node-%3E%3D%200.10.0-brightgreen.svg
+[node-image]: https://img.shields.io/badge/node-%3E=%208-brightgreen.svg
